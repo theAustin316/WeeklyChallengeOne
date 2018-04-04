@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Model> mArrayList;
-    private MyAdapter mAdapter;
+    private RecyclerView.Adapter mAdapter;
     private RecyclerView mRecyclerView;
 
 
@@ -24,10 +24,20 @@ public class MainActivity extends AppCompatActivity {
 
         initViews();
         loadData();
+
     }
 
+
+    private void initViews(){
+        mRecyclerView = findViewById(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(layoutManager);
+    }
+
+
     private void loadData() {
-        mRecyclerView = findViewById(R.id.recyler_view);
+
         mArrayList = new ArrayList<>();
 
         mArrayList.add(new Model("Constraint Layout"));
@@ -37,16 +47,14 @@ public class MainActivity extends AppCompatActivity {
         mArrayList.add(new Model("Scroll Views"));
         mArrayList.add(new Model("Grid View"));
 
+
+
         mAdapter = new MyAdapter(mArrayList);
         mRecyclerView.setAdapter(mAdapter);
+
     }
 
 
-    private void initViews(){
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyler_view);
-        mRecyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
-    }
 
 }
+
